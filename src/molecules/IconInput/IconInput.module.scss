@@ -1,0 +1,27 @@
+@import "../../assets/scss/colors.scss";
+
+.IconInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .iconImage {
+    position: absolute;
+    left: 10px;
+  }
+  .input {
+    padding-left: 35px;
+    color: $primaryWhite;
+    height: 35px;
+    width: 100%;
+    border: 0.5px solid $inputBorder;
+    outline: none;
+    border-radius: 5px;
+    background-color: $mainPrimaryTheme;
+    font-size: 16px;
+    font-weight: 100;
+    &::placeholder {
+      color: $primaryWhite;
+    }
+  }
+}

@@ -1,0 +1,67 @@
+@import "../../assets/scss/colors.scss";
+
+.signUpModal {
+  :global(.modal-content) {
+    width: 460px;
+    background-color: $mainPrimaryTheme;
+  }
+  .signUpModalHeader {
+    background-color: $headerBg;
+    font-size: 16px;
+    font-weight: bold;
+    color: $primaryOrange;
+    border: none;
+    span {
+      font-size: 30px;
+      font-weight: 100;
+      color: $primaryWhite;
+    }
+  }
+  .signUpModalBody {
+    form {
+      width: 100%;
+    }
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    .title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: $black;
+    }
+    .inputContainer {
+      width: 100%;
+      display: grid;
+      align-items: center;
+      grid-template-rows: auto;
+      // justify-content: center;
+      // column-gap: 10px;
+      row-gap: 10px;
+      margin-top: 30px;
+      .loginInput {
+        width: 100%;
+      }
+    }
+    .CreateBtn {
+      width: 323px;
+      height: 35px;
+      background: $primaryGreen 0% 0% no-repeat padding-box;
+      margin-top: 30px;
+    }
+    span {
+      text-align: center;
+      color: $primaryOrange;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 20px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+        color: $link;
+      }
+    }
+  }
+}

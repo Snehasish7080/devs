@@ -1,0 +1,8 @@
+@import "../../assets/scss/colors.scss";
+
+.textarea {
+  border: solid 1px $inputBorder;
+  width: 100%;
+  border-radius: 4px;
+  background-color: $mainPrimaryTheme;
+}

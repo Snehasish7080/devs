@@ -1,0 +1,24 @@
+@import "../../assets/scss/colors.scss";
+.avatar__container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  border: solid 1px $mainSecondaryTheme;
+  background-color: $mainSecondaryTheme;
+  .imageContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .image {
+      min-width: 50%;
+      max-width: 50%;
+      object-fit: contain;
+      opacity: 0.5;
+    }
+  }
+}

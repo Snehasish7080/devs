@@ -1,0 +1,182 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixin.scss";
+
+.reportCard {
+  width: 70%;
+  margin-top: 63px;
+  // height: 500px;
+  background-color: $white;
+  border-radius: 5px;
+  // box-shadow: $boxShadow;
+  margin-bottom: 53px;
+
+  padding: 10px 20px 10px 20px;
+  .reportHeader {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 1px $borderColor;
+    padding-bottom: 10px;
+    .profileInfo {
+      display: grid;
+      grid-template-columns: min-content min-content;
+      column-gap: 10px;
+      align-items: center;
+      @include avatar();
+      span {
+        font-size: 15px;
+        font-weight: 400;
+        color: $gold;
+      }
+    }
+    .reputationContainer {
+      display: grid;
+      grid-template-rows: min-content min-content;
+      row-gap: 5px;
+      text-align: left;
+      .totalReputation {
+        font-size: 15px;
+        font-weight: 500;
+        color: $reputation;
+      }
+      .reputation {
+        font-size: 12px;
+        font-weight: 500;
+        color: $signInBtn;
+      }
+    }
+  }
+
+  .titleHeader {
+    border-bottom: solid 1px $borderColor;
+    padding: 20px 0px 10px 0px;
+    text-align: left;
+    display: grid;
+    grid-template-rows: min-content min-content;
+    row-gap: 10px;
+    .reportNo {
+      color: $primaryGreen;
+      font-weight: 500;
+      border: solid 2px $primaryGreen;
+      background-color: $white;
+      border-radius: 4px;
+      // box-shadow: $boxShadow;
+      padding: 3px 5px 3px 5px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 300;
+      color: $primaryWhite;
+    }
+  }
+
+  .reportInfoContainer {
+    border-bottom: solid 1px $borderColor;
+    // max-width: 21%;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    text-align: left;
+    align-items: center;
+    column-gap: 8px;
+    row-gap: 5px;
+    padding: 20px 0px 20px 0px;
+    .stateTitle {
+      font-size: 13px;
+      color: $primaryWhite;
+      font-weight: 400;
+    }
+    .state {
+      font-size: 13px;
+      color: $primaryWhite;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+  }
+
+  .explanationContainer {
+    padding: 20px 0px 20px 0px;
+    display: grid;
+    grid-template-rows: min-content auto;
+    align-items: center;
+    row-gap: 10px;
+    text-align: left;
+    .explanationTitle {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      color: $primaryWhite;
+      font-weight: 300;
+    }
+    .explanation {
+      display: grid;
+      grid-template-columns: min-content auto;
+      text-align: left;
+      column-gap: 10px;
+      @include avatar();
+      color: $primaryWhite;
+      font-weight: 200;
+    }
+  }
+  .timeLineContainer {
+    padding: 20px 0px 20px 0px;
+    display: grid;
+    grid-template-rows: auto;
+    text-align: left;
+    row-gap: 20px;
+    .timelineTitle {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      color: $primaryWhite;
+      font-weight: 300;
+    }
+    .commentContainer {
+      display: grid;
+      grid-template-rows: auto;
+    }
+  }
+
+  .textAreaContainer {
+    padding: 10px 10px 10px 10px;
+    text-align: left;
+    display: grid;
+    grid-template-rows: min-content min-content min-content min-content;
+    row-gap: 20px;
+    .replyTitle {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      color: $primaryWhite;
+      font-weight: 300;
+    }
+    .textareaError {
+      display: grid;
+      grid-template-rows: min-content min-content;
+      row-gap: 10px;
+
+      .textArea {
+        border-radius: 4px;
+        border: solid 1px $inputBorder;
+        min-height: 100px;
+        outline: none;
+        padding: 10px 10px 10px 10px;
+        color: $primaryWhite;
+        font-weight: 300;
+        background-color: $mainPrimaryTheme;
+      }
+    }
+    .imageTagContainer {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      column-gap: 10px;
+    }
+    .btnContainer {
+      display: grid;
+      grid-template-columns: min-content min-content;
+      column-gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      .submitBtn {
+        background-color: $primaryGreen;
+      }
+    }
+  }
+}

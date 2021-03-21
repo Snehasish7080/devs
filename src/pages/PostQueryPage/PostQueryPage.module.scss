@@ -1,0 +1,87 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixin.scss";
+
+.postQueryMainContainer {
+  margin-top: 53px;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  width: 80%;
+  column-gap: 30px;
+  max-height: 100%;
+  .postQueryContainer {
+    margin-bottom: 53px;
+    display: grid;
+    grid-template-rows: min-content min-content;
+    row-gap: 20px;
+    @include header();
+    background-color: $white;
+    border-radius: 4px;
+
+    .inputContainer {
+      padding: 0px 20px 20px 20px;
+      display: grid;
+      grid-template-rows: 1fr;
+      row-gap: 20px;
+      .input {
+        width: 100%;
+        outline: none;
+        border-radius: 4px;
+        border: solid 1px $inputBorder;
+        height: 40px;
+        padding: 10px 10px 10px 10px;
+        color: $primaryWhite;
+        background-color: $mainPrimaryTheme;
+      }
+      .textArea {
+        width: 100%;
+        outline: none;
+        border-radius: 4px;
+        border: solid 1px $inputBorder;
+        height: 200px;
+        padding: 10px 10px 10px 10px;
+        color: $primaryWhite;
+        background-color: $mainPrimaryTheme;
+      }
+
+      .titleInput {
+        text-align: left;
+        display: grid;
+        grid-template-rows: min-content min-content;
+        row-gap: 10px;
+        .label {
+          display: grid;
+          grid-template-rows: min-content min-content;
+          font-weight: 400;
+          color: $primaryWhite;
+
+          span {
+            font-size: 12px;
+            font-weight: 300;
+            font-style: italic;
+          }
+        }
+      }
+      .infoInput {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 20px;
+      }
+      .imageTagContainer {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        column-gap: 10px;
+        row-gap: 10px;
+      }
+
+      .btnContainer {
+        display: grid;
+        grid-template-columns: min-content min-content;
+        column-gap: 20px;
+        justify-content: flex-end;
+        .submit {
+          background-color: $primaryGreen;
+        }
+      }
+    }
+  }
+}

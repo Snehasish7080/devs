@@ -1,0 +1,46 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixin.scss";
+
+.reportContainer {
+  display: grid;
+  grid-template-rows: min-content min-content;
+  row-gap: 20px;
+  background-color: $white;
+  // box-shadow: $boxShadow;
+  min-height: 500px;
+  margin-bottom: 53px;
+  border-radius: 4px;
+  @include header();
+
+  .reports {
+    // @include reports();
+    border-bottom: solid 1px $borderColor;
+    padding: 0px 20px 20px 20px;
+    display: grid;
+    grid-template-columns: min-content auto;
+    text-align: left;
+    column-gap: 10px;
+    align-items: center;
+    @include avatar();
+    .userInfo {
+      display: grid;
+      grid-template-rows: auto min-content;
+      a {
+        text-decoration: none;
+        color: $gold;
+        .title {
+          font-weight: 200;
+          color: $primaryWhite;
+        }
+      }
+      .username {
+        color: $signInBtn;
+        font-weight: 300;
+        color: $primaryWhite;
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

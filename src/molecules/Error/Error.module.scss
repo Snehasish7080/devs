@@ -1,0 +1,11 @@
+@import "../../assets/scss/colors.scss";
+
+.error {
+  span {
+    color: $danger;
+    font-weight: 500;
+    font-size: 15px;
+    text-transform: capitalize;
+    color: $danger !important;
+  }
+}

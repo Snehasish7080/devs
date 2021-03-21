@@ -1,0 +1,46 @@
+@import "../../assets/scss/colors.scss";
+
+.queriesMainContainer {
+  .searchInputContainer {
+    margin-top: 50px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    .titleInfoContainer {
+      text-align: left;
+      .title {
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 36px;
+        color: $primaryWhite;
+      }
+      span {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 350;
+        color: $primaryWhite;
+      }
+    }
+  }
+  .queriesContainer {
+    margin-bottom: 50px;
+    max-width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 30px;
+    justify-content: space-between;
+    .leftMainContainer {
+      max-height: 85%;
+      min-width: 100%;
+    }
+
+    .rightContainer {
+      display: grid;
+      grid-template-columns: auto;
+      row-gap: 30px;
+    }
+  }
+}

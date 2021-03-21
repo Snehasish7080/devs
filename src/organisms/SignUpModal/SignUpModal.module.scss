@@ -1,0 +1,58 @@
+@import "../../assets/scss/colors.scss";
+
+.signUpModal {
+  :global(.modal-content) {
+    width: 460px;
+    background-color: $mainPrimaryTheme;
+  }
+  .signUpModalHeader {
+    background-color: $headerBg;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    color: $primaryOrange;
+    span {
+      font-size: 30px;
+      font-weight: 300;
+      color: $primaryWhite;
+    }
+  }
+  .signUpModalBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: $primaryWhite;
+    }
+    .inputContainer {
+      display: grid;
+      grid-template-columns: auto auto;
+      column-gap: 10px;
+      row-gap: 10px;
+      margin-top: 30px;
+    }
+    .CreateBtn {
+      width: 323px;
+      height: 35px;
+      background: $primaryGreen 0% 0% no-repeat padding-box;
+      margin-top: 30px;
+    }
+    span {
+      color: $black;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 20px;
+      color: $primaryOrange;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+        color: $link;
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@import "./colors.scss";
+
+@mixin header {
+  .header {
+    background-color: $headerBg;
+    min-height: 50px;
+    text-align: left;
+    padding: 10px 10px 10px 10px;
+    font-size: 18px;
+    color: $primaryOrange;
+  }
+}
+
+@mixin avatar {
+  .avatar {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@mixin reports {
+  // .reports {
+  border-bottom: solid 1px $borderColor;
+  padding: 0px 20px 20px 20px;
+  display: grid;
+  grid-template-columns: min-content auto;
+  text-align: left;
+  column-gap: 10px;
+  align-items: center;
+  .avatar {
+    width: 45px;
+    height: 45px;
+  }
+  .userInfo {
+    display: grid;
+    grid-template-rows: auto min-content;
+    a {
+      text-decoration: none;
+      .title {
+        font-weight: 500;
+      }
+    }
+    .username {
+      color: $signInBtn;
+      font-weight: 500;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+  // }
+}

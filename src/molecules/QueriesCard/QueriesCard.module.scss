@@ -1,0 +1,48 @@
+@import "../../assets/scss/colors.scss";
+
+.queriesContainer {
+  min-width: 100%;
+  background-color: $mainPrimaryTheme;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+  column-gap: 20px;
+  padding: 20px 15px 20px 15px;
+  // box-shadow: $boxShadow;
+
+  .userProfileImageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+  }
+  a {
+    text-decoration: none;
+    color: $gold;
+    .queryTitle {
+      min-width: 100%;
+      max-width: 100%;
+      font-size: 17px;
+      font-weight: 400;
+      text-align: left;
+      opacity: 0.7;
+    }
+    .queryDesc {
+      min-width: 100%;
+      max-width: 100%;
+      display: flex;
+      font-size: 15px;
+      text-align: left;
+      font-weight: 300;
+      opacity: 0.5;
+    }
+  }
+
+  .priceContainer {
+    color: $gold;
+    font-size: 18px;
+    font-weight: 400;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}

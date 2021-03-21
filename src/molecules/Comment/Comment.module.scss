@@ -1,0 +1,92 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixin.scss";
+
+.infoContainer {
+  display: grid;
+  grid-template-columns: min-content auto;
+  column-gap: 10px;
+  .profileContainer {
+    display: grid;
+    grid-template-rows: min-content auto;
+    justify-content: center;
+    @include avatar();
+    .separatorContainer {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto;
+      justify-content: center;
+      .separator {
+        width: 50%;
+        min-height: 50px;
+        border-left: solid 1px $borderVerticalColor;
+      }
+    }
+  }
+
+  .commentContainer {
+    padding-bottom: 20px;
+    display: grid;
+    grid-auto-rows: min-content auto auto;
+    row-gap: 5px;
+    .userInfo {
+      display: grid;
+      grid-template-columns: max-content max-content;
+      column-gap: 10px;
+      .username {
+        font-size: 13px;
+        color: $gold;
+        font-weight: 400;
+      }
+      .userRole {
+        padding: 0px 10px 0px 10px;
+        border-radius: 20px;
+        background-color: $tagsOwner;
+        color: $primaryWhite;
+        font-size: 12px;
+        height: 20px;
+        &.reporter {
+          background-color: $tagReporter;
+        }
+      }
+    }
+    .comment {
+      font-size: 15px;
+      color: $primaryWhite;
+      font-weight: 200;
+    }
+    .mediaContainer {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: min-content min-content;
+      column-gap: 20px;
+      row-gap: 20px;
+      .mediaBoxContainer {
+        display: grid;
+        grid-template-rows: auto;
+        box-shadow: $boxShadow;
+        border-radius: 4px;
+        .header {
+          background-color: $headerBg;
+          padding: 10px 10px 10px 10px;
+          span {
+            text-transform: uppercase;
+            font-size: 15px;
+            font-weight: 500;
+            color: $primaryOrange;
+          }
+        }
+      }
+      .mediaBox {
+        padding: 10px;
+        width: 300px;
+        height: 180px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          // object-position: center;
+        }
+      }
+    }
+  }
+}

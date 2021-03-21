@@ -1,0 +1,14 @@
+@import "../../assets/scss/colors.scss";
+
+.hiddenInput {
+  display: none;
+}
+
+.DetailContestFileInput {
+  .addFiles {
+    background-color: $white;
+    border: solid 0.5px $primaryWhite;
+    color: $primaryWhite;
+    font-weight: 300;
+  }
+}
