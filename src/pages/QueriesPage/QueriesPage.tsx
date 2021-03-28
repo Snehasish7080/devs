@@ -14,6 +14,7 @@ import { IFilter } from "../../Interface/Filter";
 import { queries } from "../../api/Query";
 import { IQuery } from "../../Interface/Query";
 import { Bone } from "../../atoms/Bone/Bone";
+import { IUser } from "../../Interface/User";
 
 type QueriesData = {
   data: IQuery[];
@@ -68,6 +69,7 @@ function QueriesPage() {
                       id={item._id}
                       title={item.title}
                       description={item.description}
+                      userName={item.postedBy.username}
                       key={index}
                     />
                   );

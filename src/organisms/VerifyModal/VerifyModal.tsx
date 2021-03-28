@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./VerifyModal.module.scss";
 import { Modal } from "react-bootstrap";
 import { useFormik } from "formik";
@@ -6,6 +6,9 @@ import Button from "../../atoms/Button/Button";
 import Error from "../../molecules/Error/Error";
 import Input from "../../atoms/Input/Input";
 import { verifyValidation } from "./Validation";
+import { NavContext } from "../NavBar/NavBar";
+import { verifyAccount } from "../../api/Verify";
+import { ApiResponse } from "apisauce";
 
 type VerifyModalProps = {
   isModalOpen: boolean;
@@ -18,19 +21,38 @@ function VerifyModal({
   closeModal,
   openVerify,
 }: VerifyModalProps) {
+  const { email } = useContext(NavContext);
   const formik = useFormik({
     initialValues: {
       otp: "",
+      ServerVerifyError: "",
     },
     validationSchema: verifyValidation,
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: (values, { resetForm }) => {
-      //   userSignUp();
-      resetForm({ values: formik.initialValues });
-      //   closeModal();
+      userVerify();
     },
   });
+
+  const userVerify = async () => {
+    const response: ApiResponse<any, any> = await verifyAccount({
+      email: email,
+      otp: parseInt(formik.values.otp),
+    });
+    if (response.data.success) {
+      formik.setErrors({
+        ServerVerifyError: "",
+      });
+      formik.resetForm();
+      closeModal();
+    } else {
+      formik.setErrors({
+        ServerVerifyError: response.data.message,
+      });
+    }
+  };
+
   return (
     <Modal
       show={isModalOpen}
@@ -65,6 +87,9 @@ function VerifyModal({
               )}
             </div>
           </div>
+          {formik.errors.ServerVerifyError && (
+            <Error>*{formik.errors.ServerVerifyError}</Error>
+          )}
         </form>
         <Button
           className={styles.CreateBtn}

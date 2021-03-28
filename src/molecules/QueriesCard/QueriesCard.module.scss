@@ -18,14 +18,15 @@
   }
   a {
     text-decoration: none;
-    color: $gold;
+    color: $primaryWhite;
     .queryTitle {
+      // color: $gold;
       min-width: 100%;
       max-width: 100%;
       font-size: 17px;
       font-weight: 400;
       text-align: left;
-      opacity: 0.7;
+      // opacity: 0.7;
     }
     .queryDesc {
       min-width: 100%;
@@ -34,7 +35,7 @@
       font-size: 15px;
       text-align: left;
       font-weight: 300;
-      opacity: 0.5;
+      // opacity: 0.5;
     }
   }
 

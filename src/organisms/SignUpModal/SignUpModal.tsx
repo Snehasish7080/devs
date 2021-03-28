@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import Modal from "react-bootstrap/Modal";
 import IconInput from "../../molecules/IconInput/IconInput";
@@ -11,6 +11,7 @@ import { signUpValidation } from "./Validation";
 import Error from "../../molecules/Error/Error";
 import { ApiResponse } from "apisauce";
 import { signUp } from "../../api/SignUp";
+import { NavContext } from "../NavBar/NavBar";
 
 type SignUpModalProps = {
   isModalOpen: boolean;
@@ -24,6 +25,8 @@ function SignUpModal({
   openLogin,
   openVerify,
 }: SignUpModalProps) {
+  const { setEmail } = useContext(NavContext);
+
   const formik = useFormik({
     initialValues: {
       Username: "",
@@ -50,8 +53,9 @@ function SignUpModal({
       formik.setErrors({
         ServerSignUpError: "",
       });
-      formik.resetForm();
       closeModal();
+      if (setEmail) setEmail(formik.values.Email);
+      formik.resetForm();
       openVerify();
     } else {
       formik.setErrors({

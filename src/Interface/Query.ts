@@ -1,4 +1,5 @@
 import { IMedia } from "./IMedia";
+import { IUser } from "./User";
 
 export interface IQuery {
   _id: string;
@@ -11,4 +12,7 @@ export interface IQuery {
   status?: string;
   qImages?: File[] | File;
   mediaID?: IMedia;
+  postedBy: IUser;
+  pickedBy: IUser;
+  answeredBy: IUser;
 }

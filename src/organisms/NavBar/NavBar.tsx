@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createContext } from "react";
 import { useQuery } from "react-query";
 import styles from "./NavBar.module.scss";
 import defaultUserImg from "../../assets/images/defaultUserImg.svg";
@@ -16,12 +16,28 @@ import useLocalStorage from "react-use-localstorage";
 import useSetAuthHeader from "../../hooks/useSetAuthHeader";
 // import useOutsideClick from "../../hooks/useOutsideClick";
 
+interface State {
+  email: string;
+  setEmail?: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const defaultState: State = {
+  email: "",
+};
+
+export const NavContext = createContext<State>(defaultState);
+
 function NavBar() {
   const [authToken, setAuthToken] = useLocalStorage("authToken");
   const { setHeader } = useSetAuthHeader();
   const [showMenu, setShowMenu] = useState(false);
   const menuItemRef = useRef<HTMLDivElement | null>(null);
   const history = useHistory();
+  const [userEmail, setUserEmail] = useState<string>("");
+  const state: State = {
+    email: userEmail,
+    setEmail: setUserEmail,
+  };
   const {
     isSignUpModalOpen,
     closeSignUpModal,
@@ -80,22 +96,24 @@ function NavBar() {
             Sign In
           </span>
         </div>
-        <SignUpModal
-          isModalOpen={isSignUpModalOpen}
-          closeModal={closeSignUpModal}
-          openLogin={openLoginUpModal}
-          openVerify={openVerifyModal}
-        />
         <LoginModal
           isModalOpen={isLoginModalOpen}
           closeModal={closeLoginUpModal}
           openSignUp={openSignUpModal}
         />
-        <VerifyModal
-          isModalOpen={isVerifyModalOpen}
-          closeModal={closeVerifyModal}
-          openVerify={openVerifyModal}
-        />
+        <NavContext.Provider value={state}>
+          <SignUpModal
+            isModalOpen={isSignUpModalOpen}
+            closeModal={closeSignUpModal}
+            openLogin={openLoginUpModal}
+            openVerify={openVerifyModal}
+          />
+          <VerifyModal
+            isModalOpen={isVerifyModalOpen}
+            closeModal={closeVerifyModal}
+            openVerify={openVerifyModal}
+          />
+        </NavContext.Provider>
       </header>
     );
   } else {

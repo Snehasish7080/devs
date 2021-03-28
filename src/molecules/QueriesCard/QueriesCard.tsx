@@ -8,13 +8,16 @@ type QueriesCardProps = {
   id?: string;
   title?: string;
   description?: string;
+  userName?: string;
 };
-function QueriesCard({ id, title, description }: QueriesCardProps) {
+function QueriesCard({ id, title, description, userName }: QueriesCardProps) {
   return (
     <div className={styles.queriesContainer}>
       <div className={styles.userProfileImageContainer}>
         {id ? (
-          <Avatar />
+          <Link to={`/profile/${userName}`}>
+            <Avatar />
+          </Link>
         ) : (
           <Bone height={"60px"} width={"60px"} rounded={true} />
         )}

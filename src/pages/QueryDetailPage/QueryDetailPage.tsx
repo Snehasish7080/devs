@@ -63,11 +63,7 @@ type Params = {
 };
 
 type QueryDetailData = {
-  data: IQuery & {
-    postedBy: IUser;
-    pickedBy: IUser;
-    answeredBy: IUser;
-  };
+  data: IQuery;
 };
 
 interface State {
@@ -107,7 +103,9 @@ function QueryDetailPage() {
         <div className={styles.queryDetailContainer}>
           <div className={styles.topContainer}>
             {QueryDetail ? (
-              <Avatar />
+              <Link to={`/profile/${QueryDetail.data.postedBy.username}`}>
+                <Avatar />
+              </Link>
             ) : (
               <Bone height={"60px"} width={"60px"} rounded={true} />
             )}
@@ -127,9 +125,12 @@ function QueryDetailPage() {
                 <Bone height={"16px"} />
               )}
             </div>
-            <Link to="/submit">
-              <Button>Submit report</Button>
-            </Link>
+            <div className={styles.btnContainer}>
+              <Link to="/submit">
+                <Button className={styles.reportBtn}>Submit report</Button>
+              </Link>
+              <Button className={styles.pickBtn}>Pick Query</Button>
+            </div>
 
             <div className={styles.separator} />
             <span className={styles.queryTime}>30 min ago</span>

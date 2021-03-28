@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Avatar } from "../../atoms/Avatar/Avatar";
 import Layout from "../../molecules/Layout/Layout";
 import QueryReports from "../../molecules/QueryReports/QueryReports";
@@ -10,6 +10,7 @@ import { ApiResponse } from "apisauce";
 import { user } from "../../api/User";
 import { IUser } from "../../Interface/User";
 import { Bone } from "../../atoms/Bone/Bone";
+import { publicProfile } from "../../api/PublicProfile";
 
 const queries = [
   {
@@ -40,15 +41,21 @@ const queries = [
 ];
 
 type userData = {
-  data: IUser;
+  data: IUser[];
+};
+
+type Params = {
+  userName: string;
 };
 
 function Profile() {
-  const getUser = async () => {
-    const response: ApiResponse<any, any> = await user();
+  const { userName } = useParams<Params>();
+
+  const getUserProfile = async () => {
+    const response: ApiResponse<any, any> = await publicProfile(userName);
     return response.data;
   };
-  const { data } = useQuery<userData>("user", getUser);
+  const { data } = useQuery<userData>("publicProfile", getUserProfile);
 
   return (
     <Layout>
@@ -69,15 +76,15 @@ function Profile() {
               )}
               <div className={styles.userInfoContainer}>
                 {data ? (
-                  <span>{data?.data?.username}</span>
+                  <span>{data?.data[0].username}</span>
                 ) : (
                   <Bone height={"20px"} maxWidth={"80%"} />
                 )}
                 <p>
                   {data ? (
                     <>
-                      <span>reputation:</span>
-                      {data?.data?.reputation}
+                      <span>reputation: </span>
+                      {data?.data[0].reputation}
                     </>
                   ) : (
                     <Bone height={"20px"} maxWidth={"80%"} />

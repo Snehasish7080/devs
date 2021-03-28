@@ -45,7 +45,7 @@ const RouteConfig: RoutesConfigType[] = [
   },
   {
     exact: true,
-    path: "/profile",
+    path: "/profile/:userName",
     component: Profile,
     isPrivate: true,
   },
