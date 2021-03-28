@@ -9,12 +9,13 @@ import Layout from "../../molecules/Layout/Layout";
 import QueryDescription from "./QueryDescription/QueryDescription";
 import { Link, Route, useParams } from "react-router-dom";
 import QueryReports from "../../molecules/QueryReports/QueryReports";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { ApiResponse } from "apisauce";
 import { queryDetail } from "../../api/QueryDetail";
 import { IQuery } from "../../Interface/Query";
 import { IUser } from "../../Interface/User";
 import { Bone } from "../../atoms/Bone/Bone";
+import { picked } from "../../api/Picked";
 
 const queries = [
   {
@@ -85,6 +86,11 @@ function QueryDetailPage() {
     return response.data;
   };
 
+  // const pickedQuery = async () => {
+  //   const response: ApiResponse<any, any> = await picked(id);
+  //   return response.data;
+  // };
+
   const { data: QueryDetail } = useQuery<QueryDetailData>(
     "queryDetail",
     getQueryDetail,
@@ -92,6 +98,8 @@ function QueryDetailPage() {
       cacheTime: 0,
     }
   );
+
+  const pickedQueryMutation = useMutation((queryId: string) => picked(queryId));
 
   const state: State = {
     QueryDetail: QueryDetail,
@@ -129,7 +137,12 @@ function QueryDetailPage() {
               <Link to="/submit">
                 <Button className={styles.reportBtn}>Submit report</Button>
               </Link>
-              <Button className={styles.pickBtn}>Pick Query</Button>
+              <Button
+                className={styles.pickBtn}
+                onClick={() => pickedQueryMutation.mutate(id)}
+              >
+                Pick Query
+              </Button>
             </div>
 
             <div className={styles.separator} />
@@ -183,34 +196,44 @@ function QueryDetailPage() {
               <span>Average time to first response</span>
             </div>
             <div className={styles.responseTime}>
-              7 hrs
+              {QueryDetail ? (
+                `${QueryDetail?.data.triageTime || 1} hrs`
+              ) : (
+                <Bone height={"20px"} maxWidth={"50%"} />
+              )}
               <span>Average time to triage</span>
             </div>
           </div>
           <div className={styles.queryDetailInfo}>
             <div className={styles.header}>Current Holders</div>
-            <div className={styles.userInfoContainer}>
-              <Avatar className={styles.avatar} />
-              <div className={styles.userInfo}>
-                <span className={styles.userName}>UserName</span>
-                <span className={styles.reputation}>reputation: 100</span>
-              </div>
-            </div>
-            <div className={styles.userInfoContainer}>
-              <Avatar className={styles.avatar} />
-              <div className={styles.userInfo}>
-                <span className={styles.userName}>UserName</span>
-                <span className={styles.reputation}>reputation: 300</span>
-              </div>
-            </div>
 
-            <div className={styles.userInfoContainer}>
-              <Avatar className={styles.avatar} />
-              <div className={styles.userInfo}>
-                <span className={styles.userName}>UserName</span>
-                <span className={styles.reputation}>reputation: 160</span>
+            {QueryDetail ? (
+              <>
+                {(QueryDetail?.data.pickedBy || []).map((item, index) => {
+                  return (
+                    <div className={styles.userInfoContainer} key={index}>
+                      <Avatar className={styles.avatar} />
+                      <div className={styles.userInfo}>
+                        <span className={styles.userName}>{item.username}</span>
+                        <span className={styles.reputation}>
+                          reputation: {item.reputation}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <div className={styles.userInfoContainer}>
+                <Bone height={"45px"} width={"45px"} rounded={true} />
+                <div className={styles.userInfo}>
+                  <Bone height={"15px"} />
+                  <span className={styles.reputation}>
+                    <Bone height={"15px"} />
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

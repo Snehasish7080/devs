@@ -13,6 +13,6 @@ export interface IQuery {
   qImages?: File[] | File;
   mediaID?: IMedia;
   postedBy: IUser;
-  pickedBy: IUser;
-  answeredBy: IUser;
+  pickedBy: IUser[];
+  answeredBy: IUser[];
 }
