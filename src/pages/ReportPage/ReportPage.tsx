@@ -6,9 +6,14 @@ import { getReportById } from "../../api/ReportById";
 import { ApiResponse } from "apisauce";
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
+import { IQueryReport } from "../../Interface/QueryReport";
 
 type Params = {
   id: string;
+};
+
+type ReportDetail = {
+  data: IQueryReport;
 };
 function ReportPage() {
   const { id } = useParams<Params>();
@@ -17,15 +22,17 @@ function ReportPage() {
     return response.data;
   };
 
-  const { data: ReportDetail } = useQuery("getReport", getReport, {
-    cacheTime: 0,
-  });
-
-  // console.log(ReportDetail);
+  const { data: ReportDetail } = useQuery<ReportDetail>(
+    "getReport",
+    getReport,
+    {
+      cacheTime: 0,
+    }
+  );
 
   return (
     <Layout className={styles.reportContainer}>
-      <Report />
+      <Report reportData={ReportDetail?.data} />
     </Layout>
   );
 }

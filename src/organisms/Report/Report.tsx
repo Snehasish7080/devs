@@ -13,6 +13,8 @@ import AddFileInput from "../../molecules/AddFileInput/AddFileInput";
 import ImageTag from "../../molecules/ImageTag/ImageTag";
 import { replyValidation } from "./Validation";
 import Error from "../../molecules/Error/Error";
+import { IQueryReport } from "../../Interface/QueryReport";
+import { Bone } from "../../atoms/Bone/Bone";
 
 const data: CommentI[] = [
   {
@@ -42,7 +44,11 @@ const data: CommentI[] = [
     ],
   },
 ];
-function Report() {
+
+type ReportProps = {
+  reportData?: IQueryReport;
+};
+function Report({ reportData }: ReportProps) {
   const [commentData, setCommentData] = useState(data);
   const formik = useFormik({
     initialValues: {
@@ -96,7 +102,11 @@ function Report() {
     <div className={styles.reportCard}>
       <div className={styles.reportHeader}>
         <div className={styles.profileInfo}>
-          <Avatar className={styles.avatar} />
+          {reportData ? (
+            <Avatar className={styles.avatar} />
+          ) : (
+            <Bone height={"45px"} width={"45px"} rounded={true} />
+          )}
           <span>Username</span>
         </div>
         <div className={styles.reputationContainer}>
@@ -109,7 +119,7 @@ function Report() {
           <span className={styles.reportNo}>#1146</span>
         </div>
         <span className={styles.title}>
-          access to allows access to Uber Brazil tax documents and syste
+          {reportData ? reportData?.title : <Bone height={"20px"} />}
         </span>
       </div>
       <div className={styles.reportInfoContainer}>
@@ -122,12 +132,13 @@ function Report() {
       <div className={styles.explanationContainer}>
         <span className={styles.explanationTitle}>EXPLANATION</span>
         <div className={styles.explanation}>
-          <Avatar className={styles.avatar} />
+          {reportData ? (
+            <Avatar className={styles.avatar} />
+          ) : (
+            <Bone height={"45px"} width={"45px"} rounded={true} />
+          )}
           <span>
-            A website operated by an Uber vendor, ubertaxbr.com, allowed any
-            unauthenticated user to access pages within the site. Due to the
-            site's purpose, this vulnerability could expose sensitive
-            information.
+            {reportData ? reportData?.description : <Bone height={"30px"} />}
           </span>
         </div>
 
