@@ -14,27 +14,27 @@ import { publicProfile } from "../../api/PublicProfile";
 
 const queries = [
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     price: "$100",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     price: "$100",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     price: "$100",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     price: "$100",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     price: "$100",
     title: "queries is missing in type but required in type QueryReportsProps",
   },

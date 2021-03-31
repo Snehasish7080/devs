@@ -16,30 +16,32 @@ import { IQuery } from "../../Interface/Query";
 import { IUser } from "../../Interface/User";
 import { Bone } from "../../atoms/Bone/Bone";
 import { picked } from "../../api/Picked";
+import { getReportByQueryId } from "../../api/ReportsByQId";
+import { IQueryReport } from "../../Interface/QueryReport";
 
 const queries = [
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     name: "Username",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     name: "Username",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     name: "Username",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     name: "Username",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     name: "Username",
     title: "queries is missing in type but required in type QueryReportsProps",
   },
@@ -67,6 +69,10 @@ type QueryDetailData = {
   data: IQuery;
 };
 
+type QueryReports = {
+  data: IQueryReport[];
+};
+
 interface State {
   QueryDetail: QueryDetailData | undefined;
 }
@@ -86,6 +92,11 @@ function QueryDetailPage() {
     return response.data;
   };
 
+  const getQueryReports = async () => {
+    const response: ApiResponse<any, any> = await getReportByQueryId(id);
+    return response.data;
+  };
+
   // const pickedQuery = async () => {
   //   const response: ApiResponse<any, any> = await picked(id);
   //   return response.data;
@@ -94,6 +105,14 @@ function QueryDetailPage() {
   const { data: QueryDetail } = useQuery<QueryDetailData>(
     "queryDetail",
     getQueryDetail,
+    {
+      cacheTime: 0,
+    }
+  );
+
+  const { data: QueryReports } = useQuery<QueryReports>(
+    "queryReports",
+    getQueryReports,
     {
       cacheTime: 0,
     }
@@ -134,7 +153,7 @@ function QueryDetailPage() {
               )}
             </div>
             <div className={styles.btnContainer}>
-              <Link to="/submit">
+              <Link to={`/submit/${id}`}>
                 <Button className={styles.reportBtn}>Submit report</Button>
               </Link>
               <Button
@@ -175,7 +194,7 @@ function QueryDetailPage() {
                   path={`/query/${item.routeName}/:id`}
                   component={
                     item.routeName === "reports"
-                      ? () => <item.component queries={queries} />
+                      ? () => <item.component queries={QueryReports?.data} />
                       : item.component
                   }
                   key={index}

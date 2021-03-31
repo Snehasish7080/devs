@@ -10,19 +10,31 @@ import { MediaI } from "../../Interface/MediaI";
 import ImageTag from "../../molecules/ImageTag/ImageTag";
 import { reportValidation } from "./Validation";
 import Error from "../../molecules/Error/Error";
+import { useParams } from "react-router";
+import Input from "../../atoms/Input/Input";
+import { createReport } from "../../api/CreateReport";
+import { ApiResponse } from "apisauce";
+
+type Params = {
+  id: string;
+};
 
 function SubmitPage() {
+  const { id } = useParams<Params>();
+
   const formik = useFormik({
     initialValues: {
+      title: "",
       report: "",
       media: [] as MediaI[],
+      ServerError: "",
     },
     validationSchema: reportValidation,
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: (values, { resetForm }) => {
       //   setCommentData([...commentData, values]);
-      resetForm({ values: formik.initialValues });
+      submitReport();
     },
   });
 
@@ -58,12 +70,52 @@ function SubmitPage() {
       });
     }
   };
+
+  const submitReport = async () => {
+    const body = new FormData();
+
+    (formik.values.media || []).map((item, index) => {
+      body.append("qImages", item.file as Blob);
+    });
+
+    body.append("queryId", id);
+    body.append("title", formik.values.title);
+    body.append("description", formik.values.report);
+
+    const response: ApiResponse<any, any> = await createReport(body);
+
+    if (response.data.status) {
+      formik.setErrors({
+        ServerError: "",
+      });
+      formik.resetForm();
+      // history.push(`/query/detail/${response.data.data}`);
+    } else {
+      formik.setErrors({
+        ServerError: response.data.message,
+      });
+    }
+  };
+
   return (
     <Layout>
       <div className={styles.submitContainer}>
         <div className={styles.header}>Submit Report</div>
         <form noValidate onSubmit={formik.handleSubmit}>
           <div className={styles.inputContainer}>
+            <div>
+              <Input
+                name="title"
+                className={styles.input}
+                placeholder="Title"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.title}
+              />
+              {formik.touched.title && formik.errors.title && (
+                <Error>{formik.errors.title}</Error>
+              )}
+            </div>
             <div>
               <TextArea
                 className={styles.textArea}
@@ -92,6 +144,11 @@ function SubmitPage() {
             <div className={styles.btnContainer}>
               <AddFileInput onChange={handleAddDocuments} />
               <Button className={styles.submit}>Submit</Button>
+            </div>
+            <div className={styles.serverError}>
+              {formik.errors.ServerError && (
+                <Error>{formik.errors.ServerError}</Error>
+              )}
             </div>
           </div>
         </form>

@@ -4,22 +4,20 @@ import { Avatar } from "../../atoms/Avatar/Avatar";
 import { IQueryReport } from "../../Interface/QueryReport";
 import styles from "./QueryReports.module.scss";
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8];
-
 type QueryReportsProps = {
-  queries: IQueryReport[];
+  queries?: IQueryReport[];
 };
 
 function QueryReports({ queries }: QueryReportsProps) {
   return (
     <div className={styles.reportContainer}>
       <div className={styles.header}>Reports</div>
-      {queries.map((item, index) => {
+      {(queries || []).map((item, index) => {
         return (
           <div className={styles.reports}>
             <Avatar className={styles.avatar} />
             <div className={styles.userInfo}>
-              <Link to={"/report/:id"}>
+              <Link to={`/report/${item._id}`}>
                 <span className={styles.title}>{item?.title}</span>
               </Link>
               {item?.name && (

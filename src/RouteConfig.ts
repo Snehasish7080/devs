@@ -35,7 +35,7 @@ const RouteConfig: RoutesConfigType[] = [
   },
   {
     exact: true,
-    path: "/submit",
+    path: "/submit/:id",
     component: SubmitPage,
   },
   {

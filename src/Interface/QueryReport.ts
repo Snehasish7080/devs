@@ -1,6 +1,8 @@
 export interface IQueryReport {
-  id: string;
+  _id: string;
   title?: string;
+  queryId?: string;
   name?: string;
   price?: string;
+  submittedBy?: string;
 }
