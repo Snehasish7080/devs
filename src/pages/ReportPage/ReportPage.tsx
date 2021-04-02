@@ -7,6 +7,8 @@ import { ApiResponse } from "apisauce";
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
 import { IQueryReport } from "../../Interface/QueryReport";
+import { getComment } from "../../api/GetComment";
+import { CommentI } from "../../Interface/CommnetI";
 
 type Params = {
   id: string;
@@ -15,6 +17,11 @@ type Params = {
 type ReportDetail = {
   data: IQueryReport;
 };
+
+type ReportComments = {
+  data: CommentI[];
+};
+
 function ReportPage() {
   const { id } = useParams<Params>();
   const getReport = async () => {
@@ -22,17 +29,33 @@ function ReportPage() {
     return response.data;
   };
 
-  const { data: ReportDetail } = useQuery<ReportDetail>(
-    "getReport",
-    getReport,
-    {
-      cacheTime: 0,
-    }
-  );
+  const getReportComments = async () => {
+    const response: ApiResponse<any, any> = await getComment(id);
+    return response.data;
+  };
 
+  const {
+    data: ReportDetail,
+    refetch: reportDetailRefetch,
+  } = useQuery<ReportDetail>("getReport", getReport, {
+    cacheTime: 0,
+  });
+
+  const {
+    data: reportComments,
+    refetch: commentRefetch,
+  } = useQuery<ReportComments>("reportComments", getReportComments, {
+    cacheTime: 0,
+  });
+
+  console.log(reportComments);
   return (
     <Layout className={styles.reportContainer}>
-      <Report reportData={ReportDetail?.data} />
+      <Report
+        reportData={ReportDetail?.data}
+        comments={reportComments?.data}
+        commentRefetch={commentRefetch}
+      />
     </Layout>
   );
 }

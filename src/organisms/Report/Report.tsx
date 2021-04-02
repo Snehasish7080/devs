@@ -15,54 +15,61 @@ import { replyValidation } from "./Validation";
 import Error from "../../molecules/Error/Error";
 import { IQueryReport } from "../../Interface/QueryReport";
 import { Bone } from "../../atoms/Bone/Bone";
+import { postComment } from "../../api/CreateComment";
+import { ApiResponse } from "apisauce";
+import { useQuery } from "react-query";
+import { getComment } from "../../api/GetComment";
 
-const data: CommentI[] = [
-  {
-    id: uuidv4(),
-    isOwner: false,
-    message:
-      "Thank you for your submission! We were able to validate your report,  and have submitted it to the appropriate remediation team for review.",
-    media: [
-      {
-        id: uuidv4(),
-        content: test,
-        name: "FFE8H8",
-      },
-    ],
-  },
-  {
-    id: uuidv4(),
-    isOwner: true,
-    message:
-      "Thank you for your submission! We were able to validate your report,  and have submitted it to the appropriate remediation team for review.",
-    media: [
-      {
-        id: uuidv4(),
-        content: test,
-        name: "FFE8I8",
-      },
-    ],
-  },
-];
+// const data: CommentI[] = [
+//   {
+//     id: uuidv4(),
+//     isOwner: false,
+//     message:
+//       "Thank you for your submission! We were able to validate your report,  and have submitted it to the appropriate remediation team for review.",
+//     media: [
+//       {
+//         id: uuidv4(),
+//         content: test,
+//         name: "FFE8H8",
+//       },
+//     ],
+//   },
+//   {
+//     id: uuidv4(),
+//     isOwner: true,
+//     message:
+//       "Thank you for your submission! We were able to validate your report,  and have submitted it to the appropriate remediation team for review.",
+//     media: [
+//       {
+//         id: uuidv4(),
+//         content: test,
+//         name: "FFE8I8",
+//       },
+//     ],
+//   },
+// ];
 
 type ReportProps = {
   reportData?: IQueryReport;
+  comments?: CommentI[];
+  commentRefetch?: () => void;
 };
-function Report({ reportData }: ReportProps) {
-  const [commentData, setCommentData] = useState(data);
+
+function Report({ reportData, comments, commentRefetch }: ReportProps) {
+  // const [commentData, setCommentData] = useState(data);
   const formik = useFormik({
     initialValues: {
       id: uuidv4(),
       isOwner: false,
       message: "",
       media: [] as MediaI[],
+      ServerError: "",
     },
     validationSchema: replyValidation,
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: (values, { resetForm }) => {
-      setCommentData([...commentData, values]);
-      resetForm({ values: formik.initialValues });
+      createComment();
     },
   });
 
@@ -98,6 +105,38 @@ function Report({ reportData }: ReportProps) {
       });
     }
   };
+
+  const createComment = async () => {
+    if (reportData?._id) {
+      const body = new FormData();
+
+      (formik.values.media || []).map((item, index) => {
+        body.append("cImages", item.file as Blob);
+      });
+
+      body.append("queryReportId", reportData?._id);
+      body.append("text", formik.values.message);
+
+      const response: ApiResponse<any, any> = await postComment(body);
+
+      if (response.data.status) {
+        formik.setErrors({
+          ServerError: "",
+        });
+        formik.resetForm();
+        // history.push(`/query/detail/${response.data.data}`);
+      } else {
+        formik.setErrors({
+          ServerError: response.data.message,
+        });
+      }
+    }
+
+    if (commentRefetch) {
+      commentRefetch();
+    }
+  };
+
   return (
     <div className={styles.reportCard}>
       <div className={styles.reportHeader}>
@@ -145,7 +184,7 @@ function Report({ reportData }: ReportProps) {
         <div className={styles.timeLineContainer}>
           <span className={styles.timelineTitle}>TIMELINE</span>
           <div className={styles.commentContainer}>
-            {commentData.map((item, index) => {
+            {(comments || []).map((item, index) => {
               return <Comment comment={item} key={index} />;
             })}
           </div>

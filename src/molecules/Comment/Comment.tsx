@@ -20,7 +20,9 @@ function Comment({ comment }: CommentProps) {
       </div>
       <div className={styles.commentContainer}>
         <div className={styles.userInfo}>
-          <span className={styles.username}>UserName</span>
+          <span className={styles.username}>
+            {comment.commentedBy.username}
+          </span>
           <span
             className={
               comment.isOwner
@@ -31,16 +33,16 @@ function Comment({ comment }: CommentProps) {
             {comment.isOwner ? "Quey Owner" : "Reporter"}
           </span>
         </div>
-        <span className={styles.comment}>{comment.message}</span>
+        <span className={styles.comment}>{comment.text}</span>
         <div className={styles.mediaContainer}>
-          {comment.media.map(({ id, content, name }) => {
+          {(comment.mediaId?.cImages || []).map((item, index) => {
             return (
               <div className={styles.mediaBoxContainer}>
                 <div className={styles.header}>
-                  <span>{name}</span>
+                  <span>FFF89T</span>
                 </div>
-                <div className={styles.mediaBox} key={id}>
-                  <Image src={content} />
+                <div className={styles.mediaBox} key={index}>
+                  <Image src={process.env.REACT_APP_Image_URL + item} />
                 </div>
               </div>
             );

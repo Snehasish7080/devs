@@ -1,8 +1,11 @@
+import { IMedia } from "./IMedia";
 import { MediaI } from "./MediaI";
+import { IUser } from "./User";
 
 export interface CommentI {
-  id: string;
+  _id: string;
   isOwner: boolean;
-  message: string;
-  media: MediaI[];
+  text: string;
+  mediaId?: IMedia;
+  commentedBy: IUser;
 }
