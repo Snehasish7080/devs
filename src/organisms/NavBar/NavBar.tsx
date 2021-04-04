@@ -84,6 +84,10 @@ function NavBar() {
   if (!authToken && !data?.success) {
     return (
       <header className={styles.navBar}>
+        <Link to={"/"}>
+          <div className={styles.iconTile}>D̶͔̭̪̻ẹ̿͋̒̕v͒̄ͭ̏̇s̠҉͍͊ͅ</div>
+        </Link>
+
         <div className={styles.btnContainer}>
           <Link to="/queries">
             <span>Queries</span>
@@ -119,6 +123,7 @@ function NavBar() {
   } else {
     return (
       <header className={styles.navBar}>
+        <div>🅳🅴🆅🆂</div>
         <div className={styles.btnContainer}>
           <Link to="/queries">
             <span>Queries</span>

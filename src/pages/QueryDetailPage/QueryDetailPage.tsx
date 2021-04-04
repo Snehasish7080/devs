@@ -130,7 +130,7 @@ function QueryDetailPage() {
         <div className={styles.queryDetailContainer}>
           <div className={styles.topContainer}>
             {QueryDetail ? (
-              <Link to={`/profile/${QueryDetail.data.postedBy.username}`}>
+              <Link to={`/user/${QueryDetail.data.postedBy.username}`}>
                 <Avatar />
               </Link>
             ) : (

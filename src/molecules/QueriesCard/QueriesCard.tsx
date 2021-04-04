@@ -15,7 +15,7 @@ function QueriesCard({ id, title, description, userName }: QueriesCardProps) {
     <div className={styles.queriesContainer}>
       <div className={styles.userProfileImageContainer}>
         {id ? (
-          <Link to={`/profile/${userName}`}>
+          <Link to={`/user/${userName}`}>
             <Avatar />
           </Link>
         ) : (

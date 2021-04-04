@@ -4,8 +4,8 @@ import client from "../api/Client";
 import useIsLogin from "./useIsLogin";
 
 function useSetAuthHeader() {
-  // const [authToken, setAuthToken] = useLocalStorage("authToken");
-  const { authToken } = useIsLogin();
+  const [authToken, setAuthToken] = useLocalStorage("authToken");
+  // const { authToken } = useIsLogin();
   const setHeader = () => {
     client.setHeader("Authorization", authToken);
   };

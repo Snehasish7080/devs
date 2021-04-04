@@ -37,16 +37,17 @@ const RouteConfig: RoutesConfigType[] = [
     exact: true,
     path: "/submit/:id",
     component: SubmitPage,
+    isPrivate: true,
+  },
+  {
+    exact: true,
+    path: "/user/:userName",
+    component: Profile,
   },
   {
     exact: true,
     path: "/post",
     component: PostQueryPage,
-  },
-  {
-    exact: true,
-    path: "/profile/:userName",
-    component: Profile,
     isPrivate: true,
   },
 ];

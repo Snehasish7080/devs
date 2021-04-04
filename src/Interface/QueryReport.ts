@@ -1,3 +1,5 @@
+import { IUser } from "./User";
+
 export interface IQueryReport {
   _id: string;
   title?: string;
@@ -5,5 +7,5 @@ export interface IQueryReport {
   queryId?: string;
   name?: string;
   price?: string;
-  submittedBy?: string;
+  submittedBy?: IUser;
 }

@@ -38,17 +38,16 @@ function ReportPage() {
     data: ReportDetail,
     refetch: reportDetailRefetch,
   } = useQuery<ReportDetail>("getReport", getReport, {
-    cacheTime: 0,
+    // cacheTime: 0,
   });
 
   const {
     data: reportComments,
     refetch: commentRefetch,
   } = useQuery<ReportComments>("reportComments", getReportComments, {
-    cacheTime: 0,
+    // cacheTime: 0,
   });
 
-  console.log(reportComments);
   return (
     <Layout className={styles.reportContainer}>
       <Report

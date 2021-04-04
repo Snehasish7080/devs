@@ -146,10 +146,20 @@ function Report({ reportData, comments, commentRefetch }: ReportProps) {
           ) : (
             <Bone height={"45px"} width={"45px"} rounded={true} />
           )}
-          <span>Username</span>
+          {reportData ? (
+            <span>{reportData?.submittedBy?.username}</span>
+          ) : (
+            <Bone height={"20px"} width={"100px"} />
+          )}
         </div>
         <div className={styles.reputationContainer}>
-          <span className={styles.totalReputation}>1170</span>
+          {reportData ? (
+            <span className={styles.totalReputation}>
+              {reportData?.submittedBy?.reputation}
+            </span>
+          ) : (
+            <Bone height={"10px"} />
+          )}
           <span className={styles.reputation}>Reputation</span>
         </div>
       </div>

@@ -4,14 +4,12 @@ import useIsLogin from "./hooks/useIsLogin";
 import RouteConfig from "./RouteConfig";
 
 function Routes() {
-  const { authToken } = useIsLogin();
-  const history = useHistory();
-
+  const { User } = useIsLogin();
   return (
     <Switch>
       {RouteConfig.map(({ isPrivate, ...route }, index) => {
         if (isPrivate) {
-          if (authToken) {
+          if (User?.data?._id) {
             return <Route {...route} key={index} />;
           } else {
             return <Redirect to="/" />;

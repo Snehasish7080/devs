@@ -7,11 +7,21 @@
   box-shadow: 0px 3px 12px $darkgrey;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   position: fixed;
   min-width: 100%;
   padding: 0px 45px 0px 45px;
   z-index: 10;
+  a {
+    text-decoration: none;
+    .iconTile {
+      background: $goldGradient;
+      font-size: 25px;
+      color: transparent;
+      background-clip: text;
+      cursor: pointer;
+    }
+  }
   .btnContainer {
     position: relative;
     display: flex;
@@ -28,7 +38,6 @@
     }
     .signInBtn {
       font: normal normal 500 16px Roboto, sans-serif;
-      // color: $signInBtn;
       color: $primaryOrange;
       cursor: pointer;
     }
@@ -65,14 +74,6 @@
         cursor: pointer;
         padding: 5px 0px 5px 0px;
         color: $primaryWhite;
-        // a {
-        //   text-decoration: none;
-        //   color: $primaryWhite;
-        //   &:hover {
-        //     background-color: $menuHover;
-        //     color: $primaryOrange;
-        //   }
-        // }
         &:hover {
           background-color: $menuHover;
           color: $primaryOrange;
