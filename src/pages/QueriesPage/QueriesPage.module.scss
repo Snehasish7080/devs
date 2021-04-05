@@ -3,7 +3,7 @@
 .queriesMainContainer {
   .searchInputContainer {
     margin-top: 50px;
-    width: 90%;
+    width: 96%;
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
@@ -27,9 +27,9 @@
   }
   .queriesContainer {
     margin-bottom: 50px;
-    max-width: 90%;
+    width: 96%;
     display: grid;
-    grid-template-columns: 300px 1010px;
+    grid-template-columns: 350px 1fr;
     column-gap: 30px;
     justify-content: space-between;
     .leftMainContainer {

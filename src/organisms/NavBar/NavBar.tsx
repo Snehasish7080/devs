@@ -78,7 +78,11 @@ function NavBar() {
 
   const onClickProfile = () => {
     setShowMenu(false);
-    history.push("/profile");
+    history.push("/profile/");
+  };
+  const onClickSettings = () => {
+    setShowMenu(false);
+    history.push("/settings");
   };
 
   if (!authToken && !data?.success) {
@@ -91,9 +95,6 @@ function NavBar() {
         <div className={styles.btnContainer}>
           <Link to="/queries">
             <span>Queries</span>
-          </Link>
-          <Link to="/post">
-            <span>Post Query</span>
           </Link>
 
           <span className={styles.signInBtn} onClick={openLoginUpModal}>
@@ -123,7 +124,9 @@ function NavBar() {
   } else {
     return (
       <header className={styles.navBar}>
-        <div>🅳🅴🆅🆂</div>
+        <Link to={"/"}>
+          <div className={styles.iconTile}>D̶͔̭̪̻ẹ̿͋̒̕v͒̄ͭ̏̇s̠҉͍͊ͅ</div>
+        </Link>
         <div className={styles.btnContainer}>
           <Link to="/queries">
             <span>Queries</span>
@@ -144,6 +147,7 @@ function NavBar() {
             ref={menuItemRef}
           >
             <span onClick={onClickProfile}>Profile</span>
+            <span onClick={onClickSettings}>Settings</span>
             <span onClick={onSignOut}>SignOut</span>
           </div>
         </div>
