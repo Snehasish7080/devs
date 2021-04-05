@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import useLocalStorage from "react-use-localstorage";
 import { user } from "../api/User";
 import { IUser } from "../Interface/User";
+import useSetAuthHeader from "./useSetAuthHeader";
 
 type UserData = {
   data: IUser;
@@ -15,10 +16,15 @@ function useIsLogin() {
     const response: ApiResponse<any, any> = await user();
     return response.data;
   };
-  const { data: User } = useQuery<UserData>("user", getUser, { cacheTime: 0 });
+  const { data: User, refetch: UserRefetch } = useQuery<UserData>(
+    "user",
+    getUser,
+    { cacheTime: 0 }
+  );
 
   return {
     User,
+    UserRefetch,
   };
 }
 

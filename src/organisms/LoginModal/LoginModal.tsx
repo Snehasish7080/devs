@@ -11,6 +11,7 @@ import { loginValidation } from "./Validation";
 import { login } from "../../api/Login";
 import { ApiResponse } from "apisauce";
 import useLocalStorage from "react-use-localstorage";
+import { useHistory } from "react-router-dom";
 
 type LoginModalProps = {
   isModalOpen: boolean;
@@ -20,6 +21,8 @@ type LoginModalProps = {
 
 function LoginModal({ isModalOpen, closeModal, openSignUp }: LoginModalProps) {
   const [authToken, setAuthToken] = useLocalStorage("authToken", "");
+
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -47,6 +50,7 @@ function LoginModal({ isModalOpen, closeModal, openSignUp }: LoginModalProps) {
       });
       closeModal();
       formik.resetForm();
+      history.replace("/queries");
     } else {
       formik.setErrors({
         ServerError: response.data.message,

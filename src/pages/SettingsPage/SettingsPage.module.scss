@@ -1,2 +1,65 @@
 @import "../../assets/scss/colors.scss";
 @import "../../assets/scss/mixin.scss";
+
+.settingsMainContainer {
+  min-height: 90vh;
+  width: 96%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  column-gap: 30px;
+  .settingsContainer {
+    @include header();
+    background-color: $mainPrimaryTheme;
+
+    .takeAreaLast {
+      grid-area: 2 / 1 / span 1 / span 3;
+    }
+    .inputContainer {
+      margin-top: 20px;
+      padding: 0px 20px 50px 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 20px;
+      row-gap: 20px;
+      .titleInput {
+        text-align: left;
+        display: grid;
+        grid-template-rows: min-content min-content;
+        row-gap: 10px;
+        .label {
+          display: grid;
+          grid-template-rows: min-content min-content;
+          font-weight: 400;
+          color: $primaryWhite;
+          span {
+            font-size: 12px;
+            font-weight: 300;
+            font-style: italic;
+          }
+        }
+      }
+      .input {
+        width: 100%;
+        outline: none;
+        border-radius: 4px;
+        border: solid 1px $inputBorder;
+        height: 40px;
+        padding: 10px 10px 10px 10px;
+        color: $primaryWhite;
+        background-color: $mainPrimaryTheme;
+      }
+      .textArea {
+        width: 100%;
+        outline: none;
+        border-radius: 4px;
+        border: solid 1px $inputBorder;
+        height: 200px;
+        padding: 10px 10px 10px 10px;
+        color: $primaryWhite;
+        background-color: $mainPrimaryTheme;
+        //   grid-area: 2 / 1 / span 2 / span 3;
+      }
+    }
+  }
+}
