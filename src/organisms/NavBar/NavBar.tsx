@@ -13,6 +13,7 @@ import useLocalStorage from "react-use-localstorage";
 import useSetAuthHeader from "../../hooks/useSetAuthHeader";
 import { IUser } from "../../Interface/User";
 import useIsLogin from "../../hooks/useIsLogin";
+import Loader from "../../atoms/Loader/Loader";
 // import useOutsideClick from "../../hooks/useOutsideClick";
 
 interface State {
