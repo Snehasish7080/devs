@@ -48,6 +48,8 @@ function ReportPage() {
     // cacheTime: 0,
   });
 
+  console.log(reportComments);
+
   return (
     <Layout className={styles.reportContainer}>
       <Report

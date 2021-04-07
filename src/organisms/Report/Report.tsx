@@ -20,35 +20,6 @@ import { ApiResponse } from "apisauce";
 import { useQuery } from "react-query";
 import { getComment } from "../../api/GetComment";
 
-// const data: CommentI[] = [
-//   {
-//     id: uuidv4(),
-//     isOwner: false,
-//     message:
-//       "Thank you for your submission! We were able to validate your report,  and have submitted it to the appropriate remediation team for review.",
-//     media: [
-//       {
-//         id: uuidv4(),
-//         content: test,
-//         name: "FFE8H8",
-//       },
-//     ],
-//   },
-//   {
-//     id: uuidv4(),
-//     isOwner: true,
-//     message:
-//       "Thank you for your submission! We were able to validate your report,  and have submitted it to the appropriate remediation team for review.",
-//     media: [
-//       {
-//         id: uuidv4(),
-//         content: test,
-//         name: "FFE8I8",
-//       },
-//     ],
-//   },
-// ];
-
 type ReportProps = {
   reportData?: IQueryReport;
   comments?: CommentI[];
@@ -56,10 +27,9 @@ type ReportProps = {
 };
 
 function Report({ reportData, comments, commentRefetch }: ReportProps) {
-  // const [commentData, setCommentData] = useState(data);
   const formik = useFormik({
     initialValues: {
-      id: uuidv4(),
+      // id: uuidv4(),
       isOwner: false,
       message: "",
       media: [] as MediaI[],
@@ -124,16 +94,16 @@ function Report({ reportData, comments, commentRefetch }: ReportProps) {
           ServerError: "",
         });
         formik.resetForm();
+        if (commentRefetch) {
+          commentRefetch();
+        }
+        formik.setSubmitting(false);
         // history.push(`/query/detail/${response.data.data}`);
       } else {
         formik.setErrors({
           ServerError: response.data.message,
         });
       }
-    }
-
-    if (commentRefetch) {
-      commentRefetch();
     }
   };
 

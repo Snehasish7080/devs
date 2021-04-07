@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import QueriesCard from "../../molecules/QueriesCard/QueriesCard";
 import styles from "./QueriesPage.module.scss";
@@ -21,6 +21,8 @@ type QueriesData = {
 };
 
 function QueriesPage() {
+  const [filters, setFilters] = useState<IFilter[]>([]);
+
   const getAllCategory = async () => {
     const response: ApiResponse<any, any> = await category();
     return response.data;
@@ -35,6 +37,57 @@ function QueriesPage() {
   };
 
   const { data: Queries } = useQuery<QueriesData>("queries", getAllQuery);
+  const [queriesCopy, setQueriesCopy] = useState(Queries?.data);
+
+  const checkBoxChange = (value: IFilter) => {
+    const techs = filters;
+    const idIndex = techs.findIndex((x) => x._id === value._id);
+    if (idIndex >= 0) {
+      techs.splice(idIndex, 1);
+      setFilters(techs);
+    } else if (idIndex === -1) {
+      techs.push(value);
+      setFilters(techs);
+    }
+
+    if (filters.length > 0) {
+      const filterData = queriesCopy;
+      let Data = [] as IQuery[];
+      filters.forEach((element) => {
+        Data = (filterData || [])?.filter((item) =>
+          item.categoryID?.includes(element._id)
+        );
+      });
+      // const Data = filterData?.map((item,index)=>item.categoryID?.includes()))
+      setQueriesCopy(Data);
+    } else {
+      if (Queries?.data) {
+        setQueriesCopy(Queries?.data);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (Queries?.data) {
+      setQueriesCopy(Queries?.data);
+    }
+  }, [Queries?.data]);
+
+  // useEffect(() => {
+  //   console.log("running");
+  //   // if (filters.length > 0) {
+  //   //   const filterData = queriesCopy;
+  //   //   const Techs = filterData?.map((item, index) => item.categoryID);
+
+  //   //   console.log(Techs);
+  //   //   // Techs[0].
+  //   //   // const Data = filterData?.filter(()=> filters.filter((f)=>f._id === Techs?.filter((t)=>t.)) )
+  //   // } else {
+  //   //   if (Queries?.data) {
+  //   //     setQueriesCopy(Queries?.data);
+  //   //   }
+  //   // }
+  // }, [filters]);
 
   return (
     <Layout className={styles.queriesMainContainer}>
@@ -53,7 +106,11 @@ function QueriesPage() {
         <div>
           <div className={styles.leftMainContainer}>
             {FilterData ? (
-              <Filter filters={FilterData || []} title="Query Features" />
+              <Filter
+                filters={FilterData || []}
+                title="Query Features"
+                onCheckBoxChange={checkBoxChange}
+              />
             ) : (
               <Filter />
             )}
@@ -63,7 +120,7 @@ function QueriesPage() {
           <div className={styles.rightContainer}>
             {Queries ? (
               <>
-                {(Queries?.data || []).map((item, index) => {
+                {(queriesCopy || []).map((item, index) => {
                   return (
                     <QueriesCard
                       id={item._id}
