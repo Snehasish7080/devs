@@ -4,8 +4,9 @@ import { IUser } from "./User";
 
 export interface CommentI {
   _id: string;
-  isOwner: boolean;
+  isOwner?: boolean;
   text: string;
   mediaId?: IMedia;
   commentedBy: IUser;
+  role?: string;
 }

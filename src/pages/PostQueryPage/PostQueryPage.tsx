@@ -18,6 +18,7 @@ import { category } from "../../api/Category";
 import { useQuery } from "react-query";
 import { postQuery } from "../../api/PostQuery";
 import { useHistory } from "react-router-dom";
+import Loader from "../../atoms/Loader/Loader";
 
 function PostQueryPage() {
   const history = useHistory();
@@ -121,6 +122,7 @@ function PostQueryPage() {
         ServerError: "",
       });
       formik.resetForm();
+      formik.setSubmitting(false);
       history.push(`/query/detail/${response.data.data}`);
     } else {
       formik.setErrors({
@@ -129,122 +131,126 @@ function PostQueryPage() {
     }
   };
 
-  return (
-    <Layout>
-      <div className={styles.postQueryMainContainer}>
-        <div>
-          <Filter
-            filters={data || []}
-            title="Technology"
-            onCheckBoxChange={checkBoxChange}
-          />
-        </div>
-        <div className={styles.postQueryContainer}>
-          <div className={styles.header}>Post Query</div>
-          <form noValidate onSubmit={formik.handleSubmit}>
-            <div className={styles.inputContainer}>
-              <div className={styles.titleInput}>
-                <div className={styles.label}>Title</div>
-                <Input
-                  className={styles.input}
-                  name="title"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.title}
-                />
-                {formik.errors.title && formik.touched.title && (
-                  <Error>{formik.errors.title}</Error>
-                )}
-              </div>
-
-              <div className={styles.infoInput}>
+  if (formik.isSubmitting) {
+    return <Loader />;
+  } else {
+    return (
+      <Layout>
+        <div className={styles.postQueryMainContainer}>
+          <div>
+            <Filter
+              filters={data || []}
+              title="Technology"
+              onCheckBoxChange={checkBoxChange}
+            />
+          </div>
+          <div className={styles.postQueryContainer}>
+            <div className={styles.header}>Post Query</div>
+            <form noValidate onSubmit={formik.handleSubmit}>
+              <div className={styles.inputContainer}>
                 <div className={styles.titleInput}>
-                  <div className={styles.label}>
-                    Amount
-                    <span>(in USD)</span>
-                  </div>
+                  <div className={styles.label}>Title</div>
                   <Input
                     className={styles.input}
-                    name="amount"
+                    name="title"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.amount}
+                    value={formik.values.title}
                   />
-                  {formik.errors.amount && formik.touched.amount && (
-                    <Error>{formik.errors.amount}</Error>
+                  {formik.errors.title && formik.touched.title && (
+                    <Error>{formik.errors.title}</Error>
                   )}
                 </div>
-                <div className={styles.titleInput}>
-                  <div className={styles.label}>
-                    Average Response Time (hrs){" "}
-                    <span>(response time to the reporter)</span>
-                  </div>
-                  <Input
-                    className={styles.input}
-                    name="averageResTime"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.averageResTime}
-                  />
-                  {formik.errors.averageResTime &&
-                    formik.touched.averageResTime && (
-                      <Error>{formik.errors.averageResTime}</Error>
-                    )}
-                </div>
-                <div className={styles.titleInput}>
-                  <div className={styles.label}>
-                    Average Triage Time (hrs){" "}
-                    <span>(Conformation of Working Solution)</span>
-                  </div>
-                  <Input
-                    className={styles.input}
-                    name="averageTriageTime"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.averageTriageTime}
-                  />
-                  {formik.errors.averageTriageTime &&
-                    formik.touched.averageTriageTime && (
-                      <Error>{formik.errors.averageTriageTime}</Error>
-                    )}
-                </div>
-              </div>
-              <div className={styles.titleInput}>
-                <div className={styles.label}>Description</div>
-                <TextArea
-                  className={styles.textArea}
-                  name="description"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.description}
-                />
-                {formik.errors.description && formik.touched.description && (
-                  <Error>{formik.errors.description}</Error>
-                )}
-              </div>
-              <div className={styles.imageTagContainer}>
-                {formik.values.media.map((item, index) => {
-                  return (
-                    <ImageTag
-                      tagName={item.name as string}
-                      onCross={() => handleRemove(item.id)}
-                      key={index}
+
+                <div className={styles.infoInput}>
+                  <div className={styles.titleInput}>
+                    <div className={styles.label}>
+                      Amount
+                      <span>(in USD)</span>
+                    </div>
+                    <Input
+                      className={styles.input}
+                      name="amount"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.amount}
                     />
-                  );
-                })}
+                    {formik.errors.amount && formik.touched.amount && (
+                      <Error>{formik.errors.amount}</Error>
+                    )}
+                  </div>
+                  <div className={styles.titleInput}>
+                    <div className={styles.label}>
+                      Average Response Time (hrs){" "}
+                      <span>(response time to the reporter)</span>
+                    </div>
+                    <Input
+                      className={styles.input}
+                      name="averageResTime"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.averageResTime}
+                    />
+                    {formik.errors.averageResTime &&
+                      formik.touched.averageResTime && (
+                        <Error>{formik.errors.averageResTime}</Error>
+                      )}
+                  </div>
+                  <div className={styles.titleInput}>
+                    <div className={styles.label}>
+                      Average Triage Time (hrs){" "}
+                      <span>(Conformation of Working Solution)</span>
+                    </div>
+                    <Input
+                      className={styles.input}
+                      name="averageTriageTime"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.averageTriageTime}
+                    />
+                    {formik.errors.averageTriageTime &&
+                      formik.touched.averageTriageTime && (
+                        <Error>{formik.errors.averageTriageTime}</Error>
+                      )}
+                  </div>
+                </div>
+                <div className={styles.titleInput}>
+                  <div className={styles.label}>Description</div>
+                  <TextArea
+                    className={styles.textArea}
+                    name="description"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.description}
+                  />
+                  {formik.errors.description && formik.touched.description && (
+                    <Error>{formik.errors.description}</Error>
+                  )}
+                </div>
+                <div className={styles.imageTagContainer}>
+                  {formik.values.media.map((item, index) => {
+                    return (
+                      <ImageTag
+                        tagName={item.name as string}
+                        onCross={() => handleRemove(item.id)}
+                        key={index}
+                      />
+                    );
+                  })}
+                </div>
+                <div className={styles.btnContainer}>
+                  <AddFileInput onChange={handleAddDocuments} />
+                  <Button className={styles.submit} type="submit">
+                    Submit
+                  </Button>
+                </div>
               </div>
-              <div className={styles.btnContainer}>
-                <AddFileInput onChange={handleAddDocuments} />
-                <Button className={styles.submit} type="submit">
-                  Submit
-                </Button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
-    </Layout>
-  );
+      </Layout>
+    );
+  }
 }
 
 export default PostQueryPage;

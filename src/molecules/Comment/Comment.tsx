@@ -7,9 +7,10 @@ import { CommentI } from "../../Interface/CommnetI";
 
 type CommentProps = {
   comment: CommentI;
+  isOwner?: boolean;
 };
 
-function Comment({ comment }: CommentProps) {
+function Comment({ comment, isOwner }: CommentProps) {
   return (
     <div className={styles.infoContainer}>
       <div className={styles.profileContainer}>
@@ -25,12 +26,12 @@ function Comment({ comment }: CommentProps) {
           </span>
           <span
             className={
-              comment.isOwner
+              isOwner
                 ? `${styles.userRole}`
                 : `${styles.userRole} ${styles.reporter}`
             }
           >
-            {comment.isOwner ? "Quey Owner" : "Reporter"}
+            {isOwner ? "Quey Owner" : "Reporter"}
           </span>
         </div>
         <span className={styles.comment}>{comment.text}</span>

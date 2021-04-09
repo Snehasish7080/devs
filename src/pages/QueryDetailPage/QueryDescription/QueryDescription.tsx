@@ -26,7 +26,7 @@ function QueryDescription() {
             {(QueryDetail?.data.mediaID?.qImages || []).map((item, index) => {
               return (
                 <div className={styles.image} key={index}>
-                  <Image src={process.env.REACT_APP_Image_URL + item} />
+                  <Image src={item} />
                 </div>
               );
             })}

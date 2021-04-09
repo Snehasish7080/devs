@@ -18,6 +18,7 @@ import { Bone } from "../../atoms/Bone/Bone";
 import { picked } from "../../api/Picked";
 import { getReportByQueryId } from "../../api/ReportsByQId";
 import { IQueryReport } from "../../Interface/QueryReport";
+import useIsLogin from "../../hooks/useIsLogin";
 
 const queries = [
   {
@@ -86,6 +87,7 @@ export const QueryDetailContext = createContext<State>(defaultState);
 function QueryDetailPage() {
   const { section, id } = useParams<Params>();
   const [selectedTab, setSelectedTab] = useState(section);
+  const { User } = useIsLogin();
 
   const getQueryDetail = async () => {
     const response: ApiResponse<any, any> = await queryDetail(id);
@@ -152,17 +154,30 @@ function QueryDetailPage() {
                 <Bone height={"16px"} />
               )}
             </div>
-            <div className={styles.btnContainer}>
-              <Link to={`/submit/${id}`}>
-                <Button className={styles.reportBtn}>Submit report</Button>
-              </Link>
-              <Button
-                className={styles.pickBtn}
-                onClick={() => pickedQueryMutation.mutate(id)}
-              >
-                Pick Query
-              </Button>
-            </div>
+            {User?.data._id !== QueryDetail?.data.postedBy._id && (
+              <>
+                {QueryDetail && User?.data ? (
+                  <div className={styles.btnContainer}>
+                    <Link to={`/submit/${id}`}>
+                      <Button className={styles.reportBtn}>
+                        Submit report
+                      </Button>
+                    </Link>
+                    <Button
+                      className={styles.pickBtn}
+                      onClick={() => pickedQueryMutation.mutate(id)}
+                      disabled={QueryDetail?.data.pickedBy.some(
+                        (x) => x._id === User.data._id
+                      )}
+                    >
+                      Pick Query
+                    </Button>
+                  </div>
+                ) : (
+                  <Bone height={"50px"} />
+                )}
+              </>
+            )}
 
             <div className={styles.separator} />
             <span className={styles.queryTime}>30 min ago</span>

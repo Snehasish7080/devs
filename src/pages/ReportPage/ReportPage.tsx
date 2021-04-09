@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { IQueryReport } from "../../Interface/QueryReport";
 import { getComment } from "../../api/GetComment";
 import { CommentI } from "../../Interface/CommnetI";
+import Loader from "../../atoms/Loader/Loader";
 
 type Params = {
   id: string;
@@ -38,27 +39,29 @@ function ReportPage() {
     data: ReportDetail,
     refetch: reportDetailRefetch,
   } = useQuery<ReportDetail>("getReport", getReport, {
-    // cacheTime: 0,
+    cacheTime: 0,
   });
 
   const {
     data: reportComments,
     refetch: commentRefetch,
   } = useQuery<ReportComments>("reportComments", getReportComments, {
-    // cacheTime: 0,
+    cacheTime: 0,
   });
 
-  console.log(reportComments);
-
-  return (
-    <Layout className={styles.reportContainer}>
-      <Report
-        reportData={ReportDetail?.data}
-        comments={reportComments?.data}
-        commentRefetch={commentRefetch}
-      />
-    </Layout>
-  );
+  if (!(ReportDetail?.data && reportComments?.data)) {
+    return <Loader />;
+  } else {
+    return (
+      <Layout className={styles.reportContainer}>
+        <Report
+          reportData={ReportDetail?.data}
+          comments={reportComments?.data}
+          commentRefetch={commentRefetch}
+        />
+      </Layout>
+    );
+  }
 }
 
 export default ReportPage;

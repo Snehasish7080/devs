@@ -23,7 +23,7 @@ function QueriesCard({ id, title, description, userName }: QueriesCardProps) {
         )}
       </div>
       <div className={styles.queryInfoContainer}>
-        <Link to={`/query/detail/${id}`}>
+        <Link to={id ? `/query/detail/${id}` : "#"}>
           <div className={styles.queryTitle}>
             {title ? title : <Bone height={"30px"} width={"100%"} />}
           </div>

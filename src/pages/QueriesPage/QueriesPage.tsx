@@ -73,22 +73,6 @@ function QueriesPage() {
     }
   }, [Queries?.data]);
 
-  // useEffect(() => {
-  //   console.log("running");
-  //   // if (filters.length > 0) {
-  //   //   const filterData = queriesCopy;
-  //   //   const Techs = filterData?.map((item, index) => item.categoryID);
-
-  //   //   console.log(Techs);
-  //   //   // Techs[0].
-  //   //   // const Data = filterData?.filter(()=> filters.filter((f)=>f._id === Techs?.filter((t)=>t.)) )
-  //   // } else {
-  //   //   if (Queries?.data) {
-  //   //     setQueriesCopy(Queries?.data);
-  //   //   }
-  //   // }
-  // }, [filters]);
-
   return (
     <Layout className={styles.queriesMainContainer}>
       <div className={styles.searchInputContainer}>
