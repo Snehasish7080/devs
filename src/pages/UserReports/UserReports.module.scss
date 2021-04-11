@@ -1,0 +1,32 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixin.scss";
+
+.userReportsMainContainer {
+  display: grid;
+  grid-template-columns: 404px auto;
+  min-width: 96%;
+  margin-top: 50px;
+  column-gap: 30px;
+  .allReportsContainer {
+    @include header();
+    min-height: 200px;
+    background-color: $mainPrimaryTheme;
+    .reports {
+      padding: 10px 10px 10px 10px;
+      min-width: 100%;
+      display: grid;
+      grid-template-rows: auto;
+      row-gap: 10px;
+      justify-content: start;
+      a {
+        text-decoration: none;
+        span {
+          color: $primaryWhite;
+          &:hover {
+            color: $userNameLink;
+          }
+        }
+      }
+    }
+  }
+}

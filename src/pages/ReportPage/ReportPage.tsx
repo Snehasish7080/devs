@@ -54,11 +54,13 @@ function ReportPage() {
   } else {
     return (
       <Layout className={styles.reportContainer}>
-        <Report
-          reportData={ReportDetail?.data}
-          comments={reportComments?.data}
-          commentRefetch={commentRefetch}
-        />
+        <div className={styles.reportContainer}>
+          <Report
+            reportData={ReportDetail?.data}
+            comments={reportComments?.data}
+            commentRefetch={commentRefetch}
+          />
+        </div>
       </Layout>
     );
   }

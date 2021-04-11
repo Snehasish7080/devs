@@ -8,6 +8,7 @@ import QueryDetailPage from "./pages/QueryDetailPage/QueryDetailPage";
 import ReportPage from "./pages/ReportPage/ReportPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import SubmitPage from "./pages/SubmitPage/SubmitPage";
+import UserReports from "./pages/UserReports/UserReports";
 
 type RoutesConfigType = RouteProps & {
   isPrivate?: boolean;
@@ -43,6 +44,19 @@ const RouteConfig: RoutesConfigType[] = [
     exact: true,
     path: "/settings",
     component: SettingsPage,
+    isPrivate: true,
+  },
+  {
+    exact: true,
+    path: "/reports",
+    component: UserReports,
+    isPrivate: true,
+  },
+  {
+    exact: true,
+    path: "/reports/:id",
+    component: UserReports,
+    isPrivate: true,
   },
   {
     exact: true,

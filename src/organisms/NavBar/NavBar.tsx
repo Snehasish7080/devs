@@ -79,6 +79,10 @@ function NavBar() {
     setShowMenu(false);
     history.push("/settings");
   };
+  const onClickReports = () => {
+    setShowMenu(false);
+    history.push("/reports");
+  };
 
   if (authToken && User?.data) {
     return (
@@ -106,6 +110,7 @@ function NavBar() {
             ref={menuItemRef}
           >
             <span onClick={onClickProfile}>{User?.data?.username}</span>
+            <span onClick={onClickReports}>Reports</span>
             <span onClick={onClickSettings}>Settings</span>
             <span onClick={onSignOut}>SignOut</span>
           </div>
