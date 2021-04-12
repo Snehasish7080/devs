@@ -59,6 +59,7 @@ function ReportPage() {
             reportData={ReportDetail?.data}
             comments={reportComments?.data}
             commentRefetch={commentRefetch}
+            isCommentEnable={false}
           />
         </div>
       </Layout>

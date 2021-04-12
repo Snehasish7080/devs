@@ -1,11 +1,12 @@
 import { ApiResponse } from "apisauce";
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { getComment } from "../../api/GetComment";
 import { getReportById } from "../../api/ReportById";
 import { getReportByUserId } from "../../api/ReportByUser";
 import { Bone } from "../../atoms/Bone/Bone";
+import Loader from "../../atoms/Loader/Loader";
 import { CommentI } from "../../Interface/CommnetI";
 import { IQueryReport } from "../../Interface/QueryReport";
 import Layout from "../../molecules/Layout/Layout";
@@ -62,6 +63,11 @@ function UserReports() {
   } = useQuery<ReportComments>("reportComments", getReportComments, {
     cacheTime: 0,
   });
+
+  useEffect(() => {
+    reportDetailRefetch();
+    commentRefetch();
+  }, [id]);
   return (
     <Layout>
       <section className={styles.userReportsMainContainer}>

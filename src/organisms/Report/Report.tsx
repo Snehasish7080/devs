@@ -26,9 +26,15 @@ type ReportProps = {
   reportData?: IQueryReport;
   comments?: CommentI[];
   commentRefetch?: () => void;
+  isCommentEnable?: boolean;
 };
 
-function Report({ reportData, comments, commentRefetch }: ReportProps) {
+function Report({
+  reportData,
+  comments,
+  commentRefetch,
+  isCommentEnable = true,
+}: ReportProps) {
   const [commentCopy, setCommentCopy] = useState(comments);
   const { User } = useIsLogin();
   useEffect(() => {
@@ -204,39 +210,41 @@ function Report({ reportData, comments, commentRefetch }: ReportProps) {
           </div>
         </div>
 
-        <form noValidate onSubmit={formik.handleSubmit}>
-          <div className={styles.textAreaContainer}>
-            <span className={styles.replyTitle}>REPLY</span>
-            <div className={styles.textareaError}>
-              <TextArea
-                className={styles.textArea}
-                name="message"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.message}
-              />
-              {formik.errors.message && formik.touched.message && (
-                <Error>{formik.errors.message}</Error>
-              )}
+        {isCommentEnable && (
+          <form noValidate onSubmit={formik.handleSubmit}>
+            <div className={styles.textAreaContainer}>
+              <span className={styles.replyTitle}>REPLY</span>
+              <div className={styles.textareaError}>
+                <TextArea
+                  className={styles.textArea}
+                  name="message"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.message}
+                />
+                {formik.errors.message && formik.touched.message && (
+                  <Error>{formik.errors.message}</Error>
+                )}
+              </div>
+              <div className={styles.imageTagContainer}>
+                {formik.values.media.map((item, index) => {
+                  return (
+                    <ImageTag
+                      tagName={item.name as string}
+                      onCross={() => handleRemove(item.id)}
+                    />
+                  );
+                })}
+              </div>
+              <div className={styles.btnContainer}>
+                <AddFileInput onChange={handleAddDocuments} />
+                <Button type="submit" className={styles.submitBtn}>
+                  Submit
+                </Button>
+              </div>
             </div>
-            <div className={styles.imageTagContainer}>
-              {formik.values.media.map((item, index) => {
-                return (
-                  <ImageTag
-                    tagName={item.name as string}
-                    onCross={() => handleRemove(item.id)}
-                  />
-                );
-              })}
-            </div>
-            <div className={styles.btnContainer}>
-              <AddFileInput onChange={handleAddDocuments} />
-              <Button type="submit" className={styles.submitBtn}>
-                Submit
-              </Button>
-            </div>
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     );
   }
