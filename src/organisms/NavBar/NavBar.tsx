@@ -85,7 +85,7 @@ function NavBar() {
   };
 
   if (authToken) {
-    if (User?.data._id) {
+    if (User?.data?._id) {
       return (
         <header className={styles.navBar}>
           <Link to={"/queries"}>
