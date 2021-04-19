@@ -4,17 +4,18 @@
   :global(.modal-content) {
     width: 460px;
     background-color: $mainPrimaryTheme;
+    border: none;
   }
   .signUpModalHeader {
     background-color: $headerBg;
     font-size: 16px;
     font-weight: bold;
-    color: $primaryOrange;
+    color: $white;
     border: none;
     span {
       font-size: 30px;
       font-weight: 100;
-      color: $primaryWhite;
+      color: $white;
     }
   }
   .signUpModalBody {

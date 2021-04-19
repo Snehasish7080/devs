@@ -154,7 +154,7 @@ function QueryDetailPage() {
                 <Bone height={"16px"} />
               )}
             </div>
-            {User?.data._id !== QueryDetail?.data.postedBy._id && (
+            {User?.data?._id !== QueryDetail?.data.postedBy?._id && (
               <>
                 {QueryDetail && User?.data ? (
                   <div className={styles.btnContainer}>

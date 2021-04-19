@@ -8,7 +8,7 @@
   grid-template-columns: min-content auto min-content;
   column-gap: 20px;
   padding: 20px 15px 20px 15px;
-  // box-shadow: $boxShadow;
+  box-shadow: 0px 3px 12px $darkgrey;
 
   .userProfileImageContainer {
     display: flex;
@@ -18,7 +18,7 @@
   }
   a {
     text-decoration: none;
-    color: $primaryWhite;
+    color: $black;
     .queryTitle {
       min-width: 100%;
       max-width: 100%;
