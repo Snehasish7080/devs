@@ -14,6 +14,7 @@
     row-gap: 20px;
   }
   .profileInfo {
+    box-shadow: 0px 3px 12px $darkgrey;
     background-color: $white;
     text-align: left;
     display: grid;
@@ -41,12 +42,10 @@
           color: $gold;
         }
         p {
-          font-weight: 300;
           margin: 0px;
           font-size: 14px;
           color: $gold;
           span {
-            font-weight: 300;
             color: $gold;
           }
         }
@@ -60,8 +59,7 @@
         justify-content: space-between;
         row-gap: 20px;
         span {
-          font-weight: 300;
-          color: $primaryWhite;
+          color: $black;
         }
       }
     }
@@ -76,8 +74,8 @@
       span {
         font-size: 16px;
         line-height: 24px;
-        font-weight: 300;
-        color: $primaryWhite;
+        // font-weight: 300;
+        color: $black;
       }
     }
   }

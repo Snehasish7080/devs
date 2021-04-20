@@ -35,13 +35,13 @@
       .username {
         font-size: 13px;
         color: $gold;
-        font-weight: 400;
+        // font-weight: 400;
       }
       .userRole {
         padding: 0px 10px 0px 10px;
         border-radius: 20px;
         background-color: $tagsOwner;
-        color: $primaryWhite;
+        color: $white;
         font-size: 12px;
         height: 20px;
         &.reporter {
@@ -51,8 +51,7 @@
     }
     .comment {
       font-size: 15px;
-      color: $primaryWhite;
-      font-weight: 200;
+      color: $black;
     }
     .mediaContainer {
       margin-top: 10px;

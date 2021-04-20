@@ -71,32 +71,33 @@ function UserReports() {
   return (
     <Layout>
       <section className={styles.userReportsMainContainer}>
-        <div>
-          <div className={styles.allReportsContainer}>
-            <div className={styles.header}>Reports</div>
-            <div className={styles.reports}>
-              {AllUserReports ? (
-                <>
-                  {(AllUserReports?.data || []).map((item, index) => {
-                    return (
-                      <Link to={`/reports/${item._id}`} key={item._id}>
-                        <span>{item.title}</span>
-                      </Link>
-                    );
-                  })}
-                </>
-              ) : (
-                <Bone height={"20px"} width={"300px"} />
-              )}
-            </div>
+        {/* <div className={styles.outerReportContainer}> */}
+        <div className={styles.allReportsContainer}>
+          <div className={styles.header}>Reports</div>
+          <div className={styles.reports}>
+            {AllUserReports ? (
+              <>
+                {(AllUserReports?.data || []).map((item, index) => {
+                  return (
+                    <Link to={`/reports/${item._id}`} key={item._id}>
+                      <span>{item.title}</span>
+                    </Link>
+                  );
+                })}
+              </>
+            ) : (
+              <Bone height={"20px"} width={"300px"} />
+            )}
           </div>
         </div>
+        {/* </div> */}
         <div className={styles.reportDetailContainer}>
           {id && (
             <Report
               reportData={ReportDetail?.data}
               comments={reportComments?.data}
               commentRefetch={commentRefetch}
+              className={styles.report}
             />
           )}
         </div>

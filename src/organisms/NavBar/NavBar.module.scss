@@ -73,9 +73,9 @@
       span {
         cursor: pointer;
         padding: 5px 0px 5px 0px;
-        color: $primaryWhite;
+        color: $black;
         &:hover {
-          background-color: $menuHover;
+          // background-color: $menuHover;
           color: $primaryOrange;
         }
       }

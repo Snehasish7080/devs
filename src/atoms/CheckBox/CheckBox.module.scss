@@ -7,7 +7,7 @@
   height: 1em;
   background: $white;
   color: $black;
-  border: solid 1.5px $primaryWhite;
+  border: solid 1.5px $black;
   border-radius: 2px;
   appearance: none;
   outline: 0;
@@ -32,9 +32,9 @@
     // border-color: $checkBoxBackGround;
     // background: $checkBoxBackGround;
     // border: solid 1.5px $checkBoxBackGround;
-    border-color: $primaryGreen;
-    background: $primaryGreen;
-    border: solid 1.5px $primaryGreen;
+    border-color: $headerBg;
+    background: $headerBg;
+    border: solid 1.5px $headerBg;
 
     &::before {
       opacity: 1;

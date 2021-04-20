@@ -9,13 +9,13 @@
   padding: 5px 10px 5px 10px;
   border-radius: 4px;
   width: auto;
-  border: solid 0.5px $primaryWhite;
+  border: solid 0.5px $black;
   color: $placeholderColor;
-  background: $headerBg;
-  font-weight: 300;
+  background: $white;
+  // font-weight: 300;
   span {
     text-transform: uppercase;
-    color: $primaryWhite;
+    color: $black;
   }
   img {
     width: 10px;

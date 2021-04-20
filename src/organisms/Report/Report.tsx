@@ -27,6 +27,7 @@ type ReportProps = {
   comments?: CommentI[];
   commentRefetch?: () => void;
   isCommentEnable?: boolean;
+  className?: string;
 };
 
 function Report({
@@ -34,6 +35,7 @@ function Report({
   comments,
   commentRefetch,
   isCommentEnable = true,
+  className,
 }: ReportProps) {
   const [commentCopy, setCommentCopy] = useState(comments);
   const { User } = useIsLogin();
@@ -141,7 +143,7 @@ function Report({
     return <Loader />;
   } else {
     return (
-      <div className={styles.reportCard}>
+      <div className={`${styles.reportCard} ${className}`}>
         <div className={styles.reportHeader}>
           <div className={styles.profileInfo}>
             {reportData ? (
