@@ -12,6 +12,10 @@
   min-width: 100%;
   padding: 0px 45px 0px 45px;
   z-index: 10;
+  &.withoutShadow {
+    box-shadow: none;
+    // box-shadow: 0px 3px 12px $darkgrey;
+  }
   a {
     text-decoration: none;
     .iconTile {

@@ -10,54 +10,116 @@ import imgBg5 from "../../assets/images/background5.jpg";
 
 const images = [
   {
-    id: 0,
-    img: imgBg2,
+    image: imgBg,
   },
   {
-    id: 1,
-    img: imgBg,
+    image: imgBg2,
   },
   {
-    id: 2,
-    img: imgBg3,
+    image: imgBg3,
   },
   {
-    id: 3,
-    img: imgBg4,
+    image: imgBg4,
+  },
+];
+const text = [
+  {
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+    enim ad minim veniam, quis nostrud exercitation ullamco laboris
+    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+    in reprehenderit`,
   },
   {
-    id: 4,
-    img: imgBg5,
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut`,
+  },
+  {
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+    enim ad minim veniam, quis nostrud exercitation ullamco laboris
+    `,
+  },
+  {
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+    enim ad minim veniam, quis nostrud exercitation ullamco laboris
+    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+    in reprehenderit`,
+  },
+  {
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+    enim ad minim veniam, quis nostrud exercitation ullamco laboris
+   t`,
+  },
+  {
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+    `,
+  },
+  {
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+    enim ad minim veniam, quis nostrud exercitation ullamco laboris
+    `,
+  },
+  {
+    detail: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+    enim ad minim veniam, quis nostrud exercitation ullamco laboris
+    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+    in reprehenderit`,
   },
 ];
 
 function LandingPage() {
   return (
-    <Layout>
-      <div className={styles.gridContainer}>
-        {images.map((item, index) => {
-          return (
-            <Tilt
-              className={`${styles.tilt} ${index === 0 && styles.takeArea} ${
-                index === 2 && styles.takeAreaLast
-              }`}
-              tiltMaxAngleX={10}
-              tiltMaxAngleY={5}
-              key={item.id}
-            >
-              <div
-                className={styles.landingCard}
-                style={{
-                  background: `url(${item.img})`,
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                }}
-              >
-                <h4>Devs</h4>
-              </div>
-            </Tilt>
-          );
-        })}
+    <Layout className={styles.landingPageLayout}>
+      <div className={styles.landingPageContainer}>
+        <div className={styles.firstContainer}>
+          <h5>About Devs</h5>
+        </div>
+        <div className={styles.secondContainer}>
+          <h5>Lorem ipsum dolor</h5>
+          <div className={styles.midGridContainer}>
+            {text.slice(0, 3).map((item, index) => {
+              return (
+                <div className={styles.info} key={index}>
+                  <span>{item.detail}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className={styles.thirdContainer}>
+          <h5>Lorem ipsum dolor</h5>
+          <div className={styles.midGridContainer}>
+            {text.map((item, index) => {
+              return (
+                <div className={styles.detailInfo} key={index}>
+                  <span>{item.detail}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className={styles.fourthContainer}>
+          <h5>Lorem ipsum dolor</h5>
+          <div className={styles.midGridContainer}>
+            {images.map((item, index) => {
+              return (
+                <div
+                  className={styles.imageInfo}
+                  key={index}
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </Layout>
   );

@@ -92,7 +92,7 @@ function QueriesPage() {
             {FilterData ? (
               <Filter
                 filters={FilterData || []}
-                title="Query Features"
+                title="Query Categories"
                 onCheckBoxChange={checkBoxChange}
               />
             ) : (

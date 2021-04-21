@@ -40,6 +40,7 @@ function NavBar() {
   const menuItemRef = useRef<HTMLDivElement | null>(null);
   const history = useHistory();
   const [userEmail, setUserEmail] = useState<string>("");
+  const [isHeaderChange, setIsHeaderChange] = useState(false);
   const state: State = {
     email: userEmail,
     setEmail: setUserEmail,
@@ -84,10 +85,22 @@ function NavBar() {
     history.push("/reports");
   };
 
+  const changeHeaderStyle = () => {
+    if (window.scrollY > 100) {
+      setIsHeaderChange(true);
+    } else {
+      setIsHeaderChange(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeHeaderStyle);
+  }, []);
+
   if (authToken) {
     if (User?.data?._id) {
       return (
-        <header className={styles.navBar}>
+        <header className={`${styles.navBar} ${styles.withoutShadow}`}>
           <Link to={"/queries"}>
             <div className={styles.iconTile}>D̶͔̭̪̻ẹ̿͋̒̕v͒̄ͭ̏̇s̠҉͍͊ͅ</div>
           </Link>
@@ -123,7 +136,11 @@ function NavBar() {
     }
   } else {
     return (
-      <header className={styles.navBar}>
+      <header
+        className={`${styles.navBar} ${
+          !isHeaderChange && styles.withoutShadow
+        }`}
+      >
         <Link to={"/"}>
           <div className={styles.iconTile}>D̶͔̭̪̻ẹ̿͋̒̕v͒̄ͭ̏̇s̠҉͍͊ͅ</div>
         </Link>
